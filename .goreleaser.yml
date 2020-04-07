@@ -30,6 +30,8 @@ dockers:
     # GOARM of the built binary that should be used.
     goarm: ""
     # Templates of the Docker image names.
+    binaries:
+      - goreleaser-quick-start
     image_templates:
       - "orlmonteverde/goreleaser-quick-start:latest"
       - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}"

@@ -7,22 +7,38 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
-- env:
-  - CGO_ENABLED=0
+  - env:
+      - CGO_ENABLED=0
 archives:
-- replacements:
-    darwin: Darwin
-    linux: Linux
-    windows: Windows
-    386: i386
-    amd64: x86_64
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ .Tag }}-next"
+dockers:
+  - # GOOS of the built binary that should be used.
+    goos: linux
+
+    # GOARCH of the built binary that should be used.
+    goarch: amd64
+
+    # GOARM of the built binary that should be used.
+    goarm: ""
+    # Templates of the Docker image names.
+    image_templates:
+      - "orlmonteverde/goreleaser-quick-start:latest"
+      - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}"
+      - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+      - "orlmonteverde/goreleaser-quick-start:v{{ .Major }}"
+      - "gcr.io/orlmonteverde/goreleaser-quick-start:latest"
 changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - "^docs:"
+      - "^test:"

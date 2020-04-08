@@ -36,7 +36,8 @@ dockers:
     image_templates:
       - "orlmonteverde/goreleaser-quick-start:latest"
       - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}"
-      - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}-{{ .Env.GO_VERSION }}"
+      - 'orlmonteverde/goreleaser-quick-start:{{ replace .Tag "v" "" }}'
+      - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}-{{ .Env.GOVERSION }}"
       - "orlmonteverde/goreleaser-quick-start:v{{ .Major }}"
 changelog:
   sort: asc

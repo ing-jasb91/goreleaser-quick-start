@@ -9,6 +9,7 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
+      - GO_VERSION=go1.14
 archives:
   - replacements:
       darwin: Darwin
@@ -35,8 +36,8 @@ dockers:
     image_templates:
       - "orlmonteverde/goreleaser-quick-start:latest"
       - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}"
+      - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}-{{ .Env.GO_VERSION }}"
       - "orlmonteverde/goreleaser-quick-start:v{{ .Major }}"
-      - "gcr.io/orlmonteverde/goreleaser-quick-start:latest"
 changelog:
   sort: asc
   filters:

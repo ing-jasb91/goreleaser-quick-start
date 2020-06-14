@@ -1,28 +1,26 @@
-name: goreleaser
+name: Release
 
 on:
-  push:
+  create:
     tags:
-      - "*"
+      - v*
 
 jobs:
-  goreleaser:
+  release:
+    name: Release on GitHub
     runs-on: ubuntu-latest
     steps:
-      - name: Checkeout
-        uses: actions/checkout@v2
-      - name: Unshallow
-        run: git fetch --prune --unshallow
-      - name: Set up Go
-        uses: actions/setup-go@v2
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Validates GO releaser config
+        uses: docker://goreleaser/goreleaser:latest
         with:
-          go-version: 1.14
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+          args: check
+
+      - name: Create release on GitHub
+        uses: docker://goreleaser/goreleaser:latest
         with:
-          version: latest
-          args: release --rm-dist
+          args: release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_REPO }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          GITHUB_TOKEN: ${{secrets.GH_TOKEN_REPO}}

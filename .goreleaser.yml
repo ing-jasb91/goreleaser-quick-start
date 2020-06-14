@@ -21,23 +21,6 @@ checksum:
   name_template: "checksums.txt"
 snapshot:
   name_template: "{{ .Tag }}-next"
-dockers:
-  - # GOOS of the built binary that should be used.
-    goos: linux
-
-    # GOARCH of the built binary that should be used.
-    goarch: amd64
-
-    # GOARM of the built binary that should be used.
-    goarm: ""
-    # Templates of the Docker image names.
-    binaries:
-      - goreleaser-quick-start
-    image_templates:
-      - "orlmonteverde/goreleaser-quick-start:latest"
-      - "orlmonteverde/goreleaser-quick-start:{{ .Tag }}"
-      - 'orlmonteverde/goreleaser-quick-start:{{ replace .Tag "v" "" }}'
-      - "orlmonteverde/goreleaser-quick-start:v{{ .Major }}"
 changelog:
   sort: asc
   filters:

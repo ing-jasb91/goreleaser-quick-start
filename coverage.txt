@@ -1,0 +1,3 @@
+mode: atomic
+orlmonteverde/goreleaser-quick-start/main.go:12.59,14.2 1 1
+orlmonteverde/goreleaser-quick-start/main.go:16.13,22.2 3 0

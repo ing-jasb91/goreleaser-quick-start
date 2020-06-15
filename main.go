@@ -2,6 +2,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -14,9 +15,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	port := flag.String("port", "9000", "server port")
+	flag.Parse()
+
 	r := chi.NewRouter()
 
 	r.Get("/", indexHandler)
 
-	log.Fatal(http.ListenAndServe(":9000", r))
+	log.Fatal(http.ListenAndServe(":"+*port, r))
 }

@@ -1,4 +1,4 @@
-module orlmonteverde/goreleaser-quick-start
+module github.com/orlmonteverde/goreleaser-quick-start
 
 go 1.14
 
